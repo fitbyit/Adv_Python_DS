@@ -16,5 +16,5 @@ df = pd.DataFrame({
 })
 
 print(df)
-
+df.to_csv("data_sales.csv", index=False)
 ```
