@@ -284,15 +284,119 @@ print("Right Join:\n", right_join)
 print("Outer Join:\n", outer_join)
 ```
 
+
+Below are clear, complete examples for **Questions 8, 9, and 10** using **Pandas** and **NumPy**.
+Each solution includes sample code + explanation.
+
 ---
 
-# 🎉 **Your Practical Manual is Ready!**
+# **8. Time Series Analysis Using Pandas DateTime Features**
 
-If you want, I can also prepare:
+### **Sample Dataset**
 
-📘 **PDF booklet version**
-📚 **Exam-style questions and answers**
-🧪 **Practice datasets (CSV files)**
-📓 **Jupyter Notebook version (.ipynb)**
+```python
+import pandas as pd
 
-Would you like any of these?
+data = {
+    'date': ['2024-01-05', '2024-01-15', '2024-02-10', '2024-02-22', '2024-03-11'],
+    'sales': [1200, 1500, 1700, 1600, 2000]
+}
+
+df = pd.DataFrame(data)
+```
+
+### **Convert to DateTime**
+
+```python
+df['date'] = pd.to_datetime(df['date'])
+```
+
+### **Extract year, month, day, weekday**
+
+```python
+df['year'] = df['date'].dt.year
+df['month'] = df['date'].dt.month
+df['day'] = df['date'].dt.day
+df['weekday'] = df['date'].dt.day_name()
+```
+
+### **Group by month and calculate monthly sales**
+
+```python
+monthly_sales = df.groupby('month')['sales'].sum()
+```
+
+### **Result**
+
+```python
+print(df)
+print(monthly_sales)
+```
+
+---
+
+# **9. NumPy: Boolean Indexing + Random Array Filtering**
+
+### **Generate 1D array of 100 random integers**
+
+```python
+import numpy as np
+
+arr = np.random.randint(1, 1001, size=100)
+```
+
+### **Filter values: >500 and <800**
+
+```python
+filtered = arr[(arr > 500) & (arr < 800)]
+```
+
+### **Calculate mean of filtered values**
+
+```python
+mean_val = filtered.mean()
+```
+
+### **Output**
+
+```python
+print("Filtered values:", filtered)
+print("Mean:", mean_val)
+```
+
+---
+
+# **10. Pandas Pivot Table for Product-wise Sales per Region**
+
+### **Sample Sales Data**
+
+```python
+import pandas as pd
+
+data = {
+    'Region': ['North', 'South', 'East', 'West', 'North', 'South'],
+    'Product': ['A', 'A', 'B', 'A', 'B', 'B'],
+    'Sales': [1500, 1200, 1800, 1400, 1600, 2000]
+}
+
+df = pd.DataFrame(data)
+```
+
+### **Create Pivot Table**
+
+```python
+pivot = df.pivot_table(
+    values='Sales',
+    index='Region',
+    columns='Product',
+    aggfunc='sum',
+    fill_value=0
+)
+```
+
+### **Result**
+
+```python
+print(pivot)
+```
+
